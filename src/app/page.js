@@ -4,6 +4,8 @@ import { useState } from "react";
 
 export default function Home() {
   const [juego, setJuego] = useState(0);
+  const [inputValue, setInputValue] = useState(0)
+  const [jugador, setJugador] = useState(0)
 
   const juegos = [
     { id: 1, nombre: "Truco" },
@@ -34,11 +36,16 @@ export default function Home() {
     if (jugador === 2) setConteoTruco2((prev) => prev + 1);
   };
 
-  const handleSumarEnvido = (jugador) => {
-    if (jugador === 1) setConteoEnvido1((prev) => prev + 1);
-    if (jugador === 2) setConteoEnvido2((prev) => prev + 1);
-    if (jugador === 3) setConteoEnvido3((prev) => prev + 1);
-    if (jugador === 4) setConteoEnvido4((prev) => prev + 1);
+  const handleSumarEnvido = (jugador, value) => {
+    if (jugador === 1) setConteoEnvido1((prev) => prev + parseInt(value));
+    if (jugador === 2) setConteoEnvido2((prev) => prev + parseInt(value));
+    if (jugador === 3) setConteoEnvido3((prev) => prev + parseInt(value));
+    if (jugador === 4) setConteoEnvido4((prev) => prev + parseInt(value));
+  };
+
+  const handleSubmit = (e, jugador) => {
+    e.preventDefault();
+    handleSumarEnvido(jugador, inputValue);
   }
 
   return (
@@ -105,33 +112,46 @@ export default function Home() {
             </h1>
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>Jugador 1: {conteoEnvido1}</div>
-              <button
-                onClick={() => handleSumarEnvido(1)}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-              >
-                +1
-              </button>
               <div>Jugador 2: {conteoEnvido2}</div>
-              <button
-                onClick={() => handleSumarEnvido(2)}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-              >
-                +1
-              </button>
               <div>Jugador 3: {conteoEnvido3}</div>
-              <button
-                onClick={() => handleSumarEnvido(3)}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-              >
-                +1
-              </button>
               <div>Jugador 4: {conteoEnvido4}</div>
-              <button
-                onClick={() => handleSumarEnvido(4)}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
-              >
-                +1
-              </button>
+              <form onSubmit={(e) => handleSubmit(e, jugador)}>
+              <input
+                  type="number"
+                  id="value"
+                  placeholder="¿Cuanto suma?"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
+                <button
+                  onClick={() => setJugador(1)}
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                  1
+                </button>
+                <button
+                  onClick={() => setJugador(2)}
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                  2
+                </button>
+                <button
+                  onClick={() => setJugador(3)}
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                  3
+                </button>
+                <button
+                  onClick={() => setJugador(4)}
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                  4
+                </button>
+              </form >
             </div>
             <button
               onClick={handleReset}
