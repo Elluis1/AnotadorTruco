@@ -84,21 +84,19 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
       {/* Header */}
-      <header className="fixed top-0 left-0 w-full bg-white shadow-md z-50 p-4">
-        <title>Anotador de Truco/ChinChon</title>
+      <header className="w-full bg-white shadow-md z-50 p-4 text-center">
+        <h1 className="text-xl font-bold">Anotador de Truco/ChinChon</h1>
         <select
-          className="border p-2 rounded"
+          className="mt-2 p-2 rounded"
           value={juego}
           onChange={(e) => setJuego(Number(e.target.value))}
-          name="Juegos"
-          id="juegos-select"
         >
           <option value="0">Seleccionar el juego</option>
-          {juegos.map((juego) => (
-            <option key={juego.id} value={juego.id}>
-              {juego.nombre}
+          {juegos.map((j) => (
+            <option key={j.id} value={j.id}>
+              {j.nombre}
             </option>
           ))}
         </select>
@@ -133,12 +131,6 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <button
-              onClick={handleReset}
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Reset
-            </button>
           </div>
         )}
 
@@ -188,52 +180,47 @@ export default function Home() {
                   -10
                 </button>
               </div>
-              <form onSubmit={(e) => handleSubmit(e, jugador)}>
+              <form
+                className="flex flex-col items-center gap-2 mt-4"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  eval(
+                    `setConteoChinChon${jugador}(${eval(
+                      `conteoChinChon${jugador}`
+                    )} + Number(inputValue))`
+                  );
+                  setInputValue("");
+                }}
+              >
                 <input
                   type="number"
-                  id="value"
-                  placeholder="¿Cuanto suma?"
+                  className="border p-2 rounded"
+                  placeholder="¿Cuánto suma?"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                 />
-                <button
-                  onClick={() => setJugador(1)}
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-                  1
-                </button>
-                <button
-                  onClick={() => setJugador(2)}
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-                  2
-                </button>
-                <button
-                  onClick={() => setJugador(3)}
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-                  3
-                </button>
-                <button
-                  onClick={() => setJugador(4)}
-                  type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
-                >
-                  4
-                </button>
+                <div className="flex gap-2">
+                  {[1, 2, 3, 4].map((num) => (
+                    <button
+                      key={num}
+                      onClick={() => setJugador(num)}
+                      type="submit"
+                      className="bg-blue-500 text-white px-4 py-2 rounded"
+                    >
+                      {num}
+                    </button>
+                  ))}
+                </div>
               </form>
             </div>
-            <button
-              onClick={handleReset}
-              className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Reset
-            </button>
           </div>
         )}
+        <button
+          onClick={handleReset}
+          className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+        >
+          Reset
+        </button>
       </div>
     </div>
   );
