@@ -49,13 +49,6 @@ export default function Home() {
     if (jugador === 2) setConteoTruco2((prev) => prev + 1);
   };
 
-  const handleSumarChinChon = (jugador, value) => {
-    if (jugador === 1) setConteoChinChon1((prev) => prev + parseInt(value));
-    if (jugador === 2) setConteoChinChon2((prev) => prev + parseInt(value));
-    if (jugador === 3) setConteoChinChon3((prev) => prev + parseInt(value));
-    if (jugador === 4) setConteoChinChon4((prev) => prev + parseInt(value));
-  };
-
   const handleRestar = (jugador) => {
     if (jugador === 1) setConteoChinChon1((prev) => prev - 10);
     if (jugador === 2) setConteoChinChon2((prev) => prev - 10);
