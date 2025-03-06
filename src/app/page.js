@@ -18,12 +18,12 @@ export default function Home() {
   const [conteoTruco2, setConteoTruco2] = useState(0);
 
   useEffect(() => {
-    if (conteoTruco1 === 15) {
-      setConteoTruco1(0);
+    if (conteoTruco1 === 16) {
+      setConteoTruco1(1);
     }
 
-    if (conteoTruco2 === 15) {
-      setConteoTruco2(0);
+    if (conteoTruco2 === 16) {
+      setConteoTruco2(1);
     }
   }, [conteoTruco1, conteoTruco2]);
 
@@ -62,30 +62,179 @@ export default function Home() {
     if (jugador === 4) setConteoChinChon4((prev) => prev - 10);
   };
 
-  const renderFosforos = (cantidad) => {
-    return (
-      <div className="flex flex-wrap gap-1">
-        {Array.from({ length: cantidad }).map((_, i) => (
-          <Image
-            key={i}
-            src="/fosforo.png"
-            alt="Fósforo"
-            width={20}
-            height={50}
-          />
-        ))}
-      </div>
-    );
+  const patrones = {
+    1: [{ top: "5px", left: "20px", rotate: "-45deg" }],
+    2: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+    ],
+    3: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+    ],
+    4: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+    ],
+    5: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+    ],
+    6: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "28px", left: "20px", rotate: "-45deg" },
+    ],
+    7: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "30px", left: "20px", rotate: "-45deg" },
+      { top: "22px", left: "30px", rotate: "45deg" },
+    ],
+    8: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "30px", left: "20px", rotate: "-45deg" },
+      { top: "22px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "40px", rotate: "-45deg" },
+    ],
+    9: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "30px", left: "20px", rotate: "-45deg" },
+      { top: "22px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "40px", rotate: "-45deg" },
+      { top: "40px", left: "30px", rotate: "45deg" },
+    ],
+    10: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "30px", left: "20px", rotate: "-45deg" },
+      { top: "22px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "40px", rotate: "-45deg" },
+      { top: "40px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "30px", rotate: "0deg" },
+    ],
+    11: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "30px", left: "20px", rotate: "-45deg" },
+      { top: "22px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "40px", rotate: "-45deg" },
+      { top: "40px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "30px", rotate: "0deg" },
+      { top: "50px", left: "20px", rotate: "-45deg" },
+    ],
+    12: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "30px", left: "20px", rotate: "-45deg" },
+      { top: "22px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "40px", rotate: "-45deg" },
+      { top: "40px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "30px", rotate: "0deg" },
+      { top: "52px", left: "20px", rotate: "-45deg" },
+      { top: "44px", left: "30px", rotate: "45deg" },
+    ],
+    13: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "30px", left: "20px", rotate: "-45deg" },
+      { top: "22px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "40px", rotate: "-45deg" },
+      { top: "40px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "30px", rotate: "0deg" },
+      { top: "52px", left: "20px", rotate: "-45deg" },
+      { top: "44px", left: "30px", rotate: "45deg" },
+      { top: "52px", left: "40px", rotate: "-45deg" },
+    ],
+    14: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "30px", left: "20px", rotate: "-45deg" },
+      { top: "22px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "40px", rotate: "-45deg" },
+      { top: "40px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "30px", rotate: "0deg" },
+      { top: "52px", left: "20px", rotate: "-45deg" },
+      { top: "44px", left: "30px", rotate: "45deg" },
+      { top: "52px", left: "40px", rotate: "-45deg" },
+      { top: "60px", left: "30px", rotate: "45deg" },
+    ],
+    15: [
+      { top: "8px", left: "20px", rotate: "-45deg" },
+      { top: "0px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "40px", rotate: "-45deg" },
+      { top: "16px", left: "30px", rotate: "45deg" },
+      { top: "8px", left: "30px", rotate: "0deg" },
+      { top: "30px", left: "20px", rotate: "-45deg" },
+      { top: "22px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "40px", rotate: "-45deg" },
+      { top: "40px", left: "30px", rotate: "45deg" },
+      { top: "30px", left: "30px", rotate: "0deg" },
+      { top: "52px", left: "20px", rotate: "-45deg" },
+      { top: "44px", left: "30px", rotate: "45deg" },
+      { top: "52px", left: "40px", rotate: "-45deg" },
+      { top: "60px", left: "30px", rotate: "45deg" },
+      { top: "52px", left: "30px", rotate: "0deg" },
+    ],
   };
 
-  const handleSubmit = (e, jugador) => {
-    e.preventDefault();
-    handleSumarChinChon(jugador, inputValue);
-  };
+  const renderFosforos = (num) => (
+    <div className="relative w-20 h-20 border border-gray-500 bg-white flex items-center justify-center">
+      {(patrones[num] || []).map((fosforo, index) => (
+        <Image
+          key={index}
+          src="/fosforo.png"
+          alt="Fósforo"
+          width={10}
+          height={40}
+          style={{
+            position: "absolute",
+            top: fosforo.top,
+            left: fosforo.left,
+            transform: `rotate(${fosforo.rotate})`,
+          }}
+        />
+      ))}
+    </div>
+  );
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      {/* Header */}
       <header className="w-full bg-white shadow-md z-50 p-4 text-center">
         <h1 className="text-xl font-bold">Anotador de Truco/ChinChon</h1>
         <select
@@ -109,9 +258,9 @@ export default function Home() {
             <h1 className="text-2xl font-bold text-center mb-4">
               Anotador de Truco
             </h1>
-            <div className="flex justify-center gap-4">
-              <div>
-                <h2 className="text-lg font-semibold">Jugador 1</h2>
+            <div className="flex justify-center gap-4 bg-white p-4 rounded">
+              <div className="flex flex-col items-center border-r-4 border-black pr-4">
+                <h2 className="text-lg font-semibold text-black">Jugador 1</h2>
                 {renderFosforos(conteoTruco1)}
                 <button
                   className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
@@ -120,8 +269,8 @@ export default function Home() {
                   +1
                 </button>
               </div>
-              <div>
-                <h2 className="text-lg font-semibold">Jugador 2</h2>
+              <div className="flex flex-col items-center pl-4">
+                <h2 className="text-lg font-semibold text-black">Jugador 2</h2>
                 {renderFosforos(conteoTruco2)}
                 <button
                   className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
