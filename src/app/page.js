@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import patrones from "./designs/patterns";
+import patterns from "./designs/patterns";
 
 export default function Home() {
   const [juego, setJuego] = useState(0);
@@ -58,7 +58,7 @@ export default function Home() {
 
   const renderFosforos = (num) => (
     <div className="relative w-20 h-20 border border-gray-500 bg-white flex items-center justify-center">
-      {(patrones[num] || []).map((fosforo, index) => (
+      {(patterns[num] || []).map((fosforo, index) => (
         <Image
           key={index}
           src="/fosforo.png"

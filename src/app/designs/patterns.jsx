@@ -1,4 +1,4 @@
-const patrones = {
+const patterns = {
     1: [{ top: "5px", left: "20px", rotate: "-45deg" }],
     2: [
       { top: "8px", left: "20px", rotate: "-45deg" },
@@ -149,4 +149,4 @@ const patrones = {
     ],
   };
 
-export default patrones;
+export default patterns;
