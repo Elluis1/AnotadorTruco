@@ -133,40 +133,40 @@ export default function Home() {
             </h1>
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
-                Jugador 1: {conteoChinChon1}
+              <a className="text-lg bg-amber-50 border-2">Jugador 1: {conteoChinChon1}</a>
                 <button
                   onClick={() => handleRestar(1)}
-                  className="bg-red-500 text-white px-4 py-2 rounded"
+                  className="ml-1 bg-red-500 text-white px-4 py-2 rounded"
                 >
                   {" "}
                   -10
                 </button>
               </div>
               <div>
-                Jugador 2: {conteoChinChon2}
+              <a className="text-lg bg-amber-50 border-2">Jugador 2: {conteoChinChon2}</a>
                 <button
                   onClick={() => handleRestar(2)}
-                  className="bg-red-500 text-white px-4 py-2 rounded"
+                  className="ml-1 bg-red-500 text-white px-4 py-2 rounded"
                 >
                   {" "}
                   -10
                 </button>
               </div>
               <div>
-                Jugador 3: {conteoChinChon3}
+                <a className="text-lg bg-amber-50 border-2">Jugador 3: {conteoChinChon3}</a>
                 <button
                   onClick={() => handleRestar(3)}
-                  className="bg-red-500 text-white px-4 py-2 rounded"
+                  className="ml-1 bg-red-500 text-white px-4 py-2 rounded"
                 >
                   {" "}
                   -10
                 </button>
               </div>
               <div>
-                Jugador 4: {conteoChinChon4}
+              <a className="text-lg bg-amber-50 border-2">Jugador 4: {conteoChinChon4}</a>
                 <button
                   onClick={() => handleRestar(4)}
-                  className="bg-red-500 text-white px-4 py-2 rounded"
+                  className="ml-1 bg-red-500 text-white px-4 py-2 rounded"
                 >
                   {" "}
                   -10
@@ -186,7 +186,7 @@ export default function Home() {
               >
                 <input
                   type="number"
-                  className="border p-2 rounded"
+                  className="border p-2 rounded bg-amber-50"
                   placeholder="¿Cuánto suma?"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
@@ -197,7 +197,7 @@ export default function Home() {
                       key={num}
                       onClick={() => setJugador(num)}
                       type="submit"
-                      className="bg-blue-500 text-white px-4 py-2 rounded"
+                      className=" border-black border-2 bg-blue-500 text-white px-4 py-2 rounded"
                     >
                       {num}
                     </button>
